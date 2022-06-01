@@ -1,13 +1,10 @@
 let myLibrary = [];
-const title = document.createElement('p');
-const author = document.createElement('p');
-const pages = document.createElement('p');
-title.classList.add("book")
-const container = document.querySelector('.container');
-container.appendChild(title)
-container.appendChild(pages)
-container.appendChild(author)
-
+const CONTAINED = document.querySelector('.contain')
+const CARD = document.createElement('div');
+const newTitle = document.createElement('p');
+const newAuthor = document.createElement('p');
+const newPages = document.createElement('p');
+const REMOVEBUTTON =document.createElement('button');
 
 function Book(title, author, pages, read){{
     this.title = title 
@@ -28,31 +25,42 @@ Book.prototype.read = function(){
 function addANewBook(){
     //passes the value from each of the inputs to the Book constructor
     //submits form after user clicks submit button and gets the value of each of the book items
-   const button = document.getElementById('submit')
-   button.addEventListener('click', ()=>{
-    let book = new Book( 
-        document.getElementById('title').value,
-        document.getElementById('author').value,
-        document.getElementById('pages').value
+    const button = document.getElementById('submit')
+    button.addEventListener('click', ()=>{
+        let book = new Book( 
+            document.getElementById('title').value,
+            document.getElementById('author').value,
+            document.getElementById('pages').value
             );
-            //pushes new book to myLibrary array for each submission
-            //for every book create a new card and add the new text content
-            myLibrary.push(book)
-            title.textContent = `${book.title}`
-            author.textContent = `${book.author}`
-            pages.textContent = `${book.pages}`
-            console.log(myLibrary)
+                //pushes new book to myLibrary array for each submission
+                //for every book create a new card and add the new text content
+                myLibrary.push(book)
+                const CARD = document.createElement('div');
+                const newTitle = document.createElement('p');
+                const newAuthor = document.createElement('p');
+                const newPages = document.createElement('p');
+                const REMOVEBUTTON =document.createElement('button');
+                REMOVEBUTTON.setAttribute(`onclick= 'removeBook()'`)
+                CARD.classList.add('container')
+                CONTAINED.appendChild(CARD);
+                CARD.appendChild(newTitle);
+                CARD.appendChild(newAuthor);
+                CARD.appendChild(newPages);
+                CARD.appendChild(REMOVEBUTTON)
+                newTitle.textContent = `${book.title}`
+                newAuthor.textContent = `${book.author}`
+                newPages.textContent = `${book.pages}`
+                REMOVEBUTTON.textContent = `Remove`
+                return myLibrary
    })
-   
+
 }
+addANewBook()
 
-let book = new Book("Lord of The Rings", "J.R.R Tolkien", "123")
-
-myLibrary.push(book);
-title.textContent = `${book.title}`
-author.textContent = `${book.author}`
-pages.textContent = `${book.pages}`
-book.read()
-book.notRead();
-addANewBook();
-console.log(myLibrary)
+function removeBook(){
+    //removes book from library on click
+    REMOVEBUTTON.addEventListener('click' , ()=>{
+        CONTAINED.removeChild(CARD);
+    })
+}
+removeBook()

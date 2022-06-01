@@ -1,0 +1,10 @@
+.container{
+    background-color:aquamarine;
+    border-radius:20px;
+    padding:20px;
+}
+
+.contain{
+    display:grid;
+    grid-template:1fr 1fr 1fr 1fr/ 1fr 1fr
+}
