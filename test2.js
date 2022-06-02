@@ -83,7 +83,7 @@ function displayBook(){
 
 function removeBook(){
     addANewBook()
-    const CARDCLONE =document.querySelector('[data-attribute]').value
+    const CARDCLONE =document.querySelector('[data-attribute]')
     CONTAINED.removeChild(CARDCLONE)
     console.log(myLibrary)
     for(const book in myLibrary){
