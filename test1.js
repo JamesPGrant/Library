@@ -7,12 +7,17 @@ const CONTAINED = document.querySelector('.contain')
 const READBUTTON = document.createElement('button');
 const BUTTON = document.getElementById('submit');
 const BUTTON2 = document.querySelector('.submit');
+const newTitle = document.createElement('p');
+const newAuthor = document.createElement('p');
+const newPages = document.createElement('p');
+const CARD = document.createElement('div');
+const REMOVEBUTTON =document.createElement('button');
 
 
 let myLibrary = [];
 
 class Book{
-    constructor(title, author, pages){
+    constructor(title, author, pages, read){
         this.title = title
         this.author = author
         this.pages =pages
@@ -23,8 +28,7 @@ Book.prototype.notRead = function(){
     READBUTTON.textContent = `Not Read`
     READBUTTON.classList.remove( 'btn','btn-success', 'read')
     READBUTTON.classList.add('btn', 'btn-danger', 'read')
-    READBUTTON.addEventListener('click', Book.prototype.read)
-    this.notRead = true;
+    this.read = 'false';
     console.log(this.title, 'has not been read ')
 }
     
@@ -35,7 +39,7 @@ Book.prototype.read = function(){
         READBUTTON.classList.remove('btn', 'btn-danger', 'read')
         READBUTTON.classList.add('btn','btn-success', 'read')
         READBUTTON.addEventListener('click', Book.prototype.notRead)
-        this.read = true;
+        this.read = 'true';
         console.log(myLibrary)
 }
 
@@ -49,14 +53,11 @@ BUTTON.addEventListener('click', addANewBook)
 BUTTON.addEventListener(`click`, displayBook)
 
 function displayBook(){
+    let i = myLibrary.length
     for(const book of myLibrary){
-        const CARD = document.createElement('div');
-        const REMOVEBUTTON =document.createElement('button');
+        for(book[i] of myLibrary){
         REMOVEBUTTON.classList.add(`removed`, `btn`, `btn-warning`)
         CARD.classList.add('container', "bg-light")
-        const newTitle = document.createElement('p');
-        const newAuthor = document.createElement('p');
-        const newPages = document.createElement('p');
         CONTAINED.appendChild(CARD);
         CARD.appendChild(newTitle);
         CARD.appendChild(newAuthor);
@@ -71,11 +72,23 @@ function displayBook(){
         READBUTTON.textContent = `Not Read`
         REMOVEBUTTON.addEventListener('click', removeBook)
         READBUTTON.addEventListener('click', Book.prototype.read)
+        
+        }
     } 
 }
 
 
+
 function removeBook(){
     //removes book from library on click
-console.log('hello world!')
+    CONTAINED.removeChild(CARD)
 }
+
+function readBook(){
+    if(myLibrary.read === false){
+        READBUTTON.addEventListener('click', Book.prototype.read)
+    } else if(myLibrary.read === true){
+        READBUTTON.addEventListener('click', Book.prototype.notRead)
+    }
+}
+readBook()
