@@ -102,7 +102,7 @@ function readToggle() {
     for (let i = 0; i < READBUTTON.length; i++) {
       READBUTTON[i].id = `H`    
       READBUTTON[i].textContent = `Read`
-      READBUTTON[i].classList.remove('btn', 'btn-danger')
+      READBUTTON[i].classList.remove('btn', 'btn-danger', 'read')
       READBUTTON[i].classList.add('btn','btn-success', 'read')
       READBUTTON[i].addEventListener('click', notReadToggle)
       

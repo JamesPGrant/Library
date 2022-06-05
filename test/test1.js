@@ -42,7 +42,9 @@ Book.prototype.read = function(){
         this.read = 'true';
         console.log(myLibrary)
 }
-
+function addForm(){
+    
+}
 function addANewBook(book){
         const newbook = new Book( TITLE.value, AUTHOR.value,PAGES.value)
         myLibrary.push(newbook)
